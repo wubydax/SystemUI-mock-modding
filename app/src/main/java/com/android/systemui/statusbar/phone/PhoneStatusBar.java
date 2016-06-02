@@ -23,33 +23,31 @@ public class PhoneStatusBar extends com.android.systemui.statusbar.BaseStatusBar
 
     @Override
     protected PhoneStatusBarView makeStatusBarView() {
-        mIsDataViewEnabled = isDataViewEnabled();
-        mNotificationPanel.updateShowDataUsageVisibility(isDataViewEnabled());
-        setCarrierTextVisibility();
+//        mIsDataViewEnabled = isDataViewEnabled();
+//        mNotificationPanel.updateShowDataUsageVisibility(isDataViewEnabled());
+//        setCarrierTextVisibility();
         return mStatusBarView;
     }
 
 
-
-
-    void setCarrierTextVisibility() {
-        int id = mContext.getResources().getIdentifier("adi_carrier_label", "id", mContext.getPackageName());
-        int visibility = Settings.System.getInt(mContext.getContentResolver(), "dax_sb_carrier_label", 0) == 1 ? View.VISIBLE : View.GONE;
-        mStatusBarView.findViewById(id).setVisibility(visibility);
-    }
-
-    boolean isDataViewEnabled() {
-        return Settings.System.getInt(mContext.getContentResolver(), "data_usage_key_whatever", 1) == 1;
-    }
-
-    void setTroyColor() {
-        TextView someText = (TextView) mStatusBarView.findViewById(getIdentifier("troy_custom_text", "id"));
-        someText.setTextColor(Settings.System.getInt(mContext.getContentResolver(), "text_color_for_example", Color.WHITE));
-    }
-
-    int getIdentifier(String type, String name) {
-        return mContext.getResources().getIdentifier(name, type, mContext.getPackageName());
-    }
+//    void setCarrierTextVisibility() {
+//        int id = mContext.getResources().getIdentifier("adi_carrier_label", "id", mContext.getPackageName());
+//        int visibility = Settings.System.getInt(mContext.getContentResolver(), "dax_sb_carrier_label", 0) == 1 ? View.VISIBLE : View.GONE;
+//        mStatusBarView.findViewById(id).setVisibility(visibility);
+//    }
+//
+//    boolean isDataViewEnabled() {
+//        return Settings.System.getInt(mContext.getContentResolver(), "data_usage_key_whatever", 1) == 1;
+//    }
+//
+//    void setTroyColor() {
+//        TextView someText = (TextView) mStatusBarView.findViewById(getIdentifier("troy_custom_text", "id"));
+//        someText.setTextColor(Settings.System.getInt(mContext.getContentResolver(), "text_color_for_example", Color.WHITE));
+//    }
+//
+//    int getIdentifier(String type, String name) {
+//        return mContext.getResources().getIdentifier(name, type, mContext.getPackageName());
+//    }
 
 
     @Override
@@ -59,12 +57,12 @@ public class PhoneStatusBar extends com.android.systemui.statusbar.BaseStatusBar
 
     @Override
     public void onHeadsUpPinned(ExpandableNotificationRow headsUp) {
-        removeNotificationBg();
+        handlePanelBgVisibility(false);
     }
 
     @Override
     public void onHeadsUpUnPinned(ExpandableNotificationRow headsUp) {
-        setBgVisible();
+        handlePanelBgVisibility(true);
     }
 
     @Override
@@ -72,13 +70,19 @@ public class PhoneStatusBar extends com.android.systemui.statusbar.BaseStatusBar
 
     }
 
-    private void setBgVisible() {
+    private void handlePanelBgVisibility(boolean setVisible) {
         int id = mContext.getResources().getIdentifier("gear_panel_bg_view", "id", mContext.getPackageName());
-        mNotificationPanel.findViewById(id).setVisibility(View.VISIBLE);
+        PanelBackgroundView panelBackgroundView = (PanelBackgroundView) mNotificationPanel.findViewById(id);
+        panelBackgroundView.setPanelBgVisibility(setVisible);
     }
-
-    private void removeNotificationBg() {
-        int id = mContext.getResources().getIdentifier("gear_panel_bg_view", "id", mContext.getPackageName());
-        mNotificationPanel.findViewById(id).setVisibility(View.GONE);
-    }
+//
+//    private void setBgVisible() {
+//        int id = mContext.getResources().getIdentifier("gear_panel_bg_view", "id", mContext.getPackageName());
+//        mNotificationPanel.findViewById(id).setVisibility(View.VISIBLE);
+//    }
+//
+//    private void removeNotificationBg() {
+//        int id = mContext.getResources().getIdentifier("gear_panel_bg_view", "id", mContext.getPackageName());
+//        mNotificationPanel.findViewById(id).setVisibility(View.GONE);
+//    }
 }

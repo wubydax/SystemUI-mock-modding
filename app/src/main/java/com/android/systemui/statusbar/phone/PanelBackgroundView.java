@@ -13,11 +13,15 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Roberto Mariani Anna Berkovitch on 29/05/2016.
@@ -27,6 +31,9 @@ public class PanelBackgroundView extends ImageView {
     public static final String LOG_TAG = "daxgirl";
     private String mUriString;
     private Drawable mDrawable;
+    private static final ScheduledExecutorService SERVICE_SCHEDULER =
+            Executors.newSingleThreadScheduledExecutor();
+
 
     public PanelBackgroundView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -111,6 +118,21 @@ public class PanelBackgroundView extends ImageView {
     protected void onFinishInflate() {
         super.onFinishInflate();
         setScaleType(ScaleType.CENTER_CROP);
+    }
+
+    public void setPanelBgVisibility(boolean isToSetVisible) {
+        if(!isToSetVisible) {
+            setVisibility(View.GONE);
+        } else {
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    setVisibility(View.VISIBLE);
+                }
+            };
+            SERVICE_SCHEDULER.schedule(runnable, 500, TimeUnit.MILLISECONDS);
+        }
+
     }
 
 }
