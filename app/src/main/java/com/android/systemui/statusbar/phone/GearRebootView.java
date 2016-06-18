@@ -31,6 +31,16 @@ public class GearRebootView extends ImageView implements View.OnClickListener {
         mGearSettingsObserver = new GearSettingsObserver(new Handler());
     }
 
+    void openRebootService() {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName("com.wubydax.gearreboot", "com.wubydax.gearreboot.GearRebootDialogService"));
+        if(mContext.getPackageManager().resolveService(intent, 0) != null) {
+            mContext.startService(intent);
+        } else {
+            Toast.makeText(mContext, "Service not found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -47,6 +57,8 @@ public class GearRebootView extends ImageView implements View.OnClickListener {
         if (id != 0) {
             setImageDrawable(mContext.getDrawable(id));
         }
+        updateViewColorOverlay();
+        updateViewVisibility();
     }
 
     @Override
