@@ -28,13 +28,13 @@
     .param p2, "handler"    # Landroid/os/Handler;
 
     .prologue
-    .line 94
+    .line 85
     iput-object p1, p0, Lcom/android/systemui/statusbar/phone/GearRebootView$GearSettingsObserver;->this$0:Lcom/android/systemui/statusbar/phone/GearRebootView;
 
-    .line 95
+    .line 86
     invoke-direct {p0, p2}, Landroid/database/ContentObserver;-><init>(Landroid/os/Handler;)V
 
-    .line 96
+    .line 87
     # getter for: Lcom/android/systemui/statusbar/phone/GearRebootView;->mVisibilityKey:Ljava/lang/String;
     invoke-static {p1}, Lcom/android/systemui/statusbar/phone/GearRebootView;->access$000(Lcom/android/systemui/statusbar/phone/GearRebootView;)Ljava/lang/String;
 
@@ -46,7 +46,7 @@
 
     iput-object v0, p0, Lcom/android/systemui/statusbar/phone/GearRebootView$GearSettingsObserver;->mVisibilityUri:Landroid/net/Uri;
 
-    .line 97
+    .line 88
     # getter for: Lcom/android/systemui/statusbar/phone/GearRebootView;->mColorKey:Ljava/lang/String;
     invoke-static {p1}, Lcom/android/systemui/statusbar/phone/GearRebootView;->access$100(Lcom/android/systemui/statusbar/phone/GearRebootView;)Ljava/lang/String;
 
@@ -58,7 +58,7 @@
 
     iput-object v0, p0, Lcom/android/systemui/statusbar/phone/GearRebootView$GearSettingsObserver;->mColorUri:Landroid/net/Uri;
 
-    .line 99
+    .line 90
     return-void
 .end method
 
@@ -70,10 +70,10 @@
     .param p2, "uri"    # Landroid/net/Uri;
 
     .prologue
-    .line 103
+    .line 94
     invoke-super {p0, p1, p2}, Landroid/database/ContentObserver;->onChange(ZLandroid/net/Uri;)V
 
-    .line 104
+    .line 95
     iget-object v0, p0, Lcom/android/systemui/statusbar/phone/GearRebootView$GearSettingsObserver;->mVisibilityUri:Landroid/net/Uri;
 
     invoke-virtual {p2, v0}, Landroid/net/Uri;->equals(Ljava/lang/Object;)Z
@@ -82,18 +82,18 @@
 
     if-eqz v0, :cond_11
 
-    .line 105
+    .line 96
     iget-object v0, p0, Lcom/android/systemui/statusbar/phone/GearRebootView$GearSettingsObserver;->this$0:Lcom/android/systemui/statusbar/phone/GearRebootView;
 
     # invokes: Lcom/android/systemui/statusbar/phone/GearRebootView;->updateViewVisibility()V
     invoke-static {v0}, Lcom/android/systemui/statusbar/phone/GearRebootView;->access$200(Lcom/android/systemui/statusbar/phone/GearRebootView;)V
 
-    .line 109
+    .line 100
     :cond_10
     :goto_10
     return-void
 
-    .line 106
+    .line 97
     :cond_11
     iget-object v0, p0, Lcom/android/systemui/statusbar/phone/GearRebootView$GearSettingsObserver;->mColorUri:Landroid/net/Uri;
 
@@ -103,7 +103,7 @@
 
     if-eqz v0, :cond_10
 
-    .line 107
+    .line 98
     iget-object v0, p0, Lcom/android/systemui/statusbar/phone/GearRebootView$GearSettingsObserver;->this$0:Lcom/android/systemui/statusbar/phone/GearRebootView;
 
     # invokes: Lcom/android/systemui/statusbar/phone/GearRebootView;->updateViewColorOverlay()V
